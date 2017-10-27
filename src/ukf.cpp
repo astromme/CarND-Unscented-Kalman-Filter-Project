@@ -32,14 +32,10 @@ UKF::UKF() {
       change in yaw angle (psi_dot)
        */
 
+   n_x_ = 5;
+
   // initial covariance matrix
-  P_ = MatrixXd(5, 5);
-  P_ <<
-    1, 0, 0, 0, 0,
-    0, 1, 0, 0, 0,
-    0, 0, 500, 0, 0,
-    0, 0, 0, 500, 0,
-    0, 0, 0, 0, 500;
+  P_ = MatrixXd::Identity(n_x_, n_x_);
 
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
@@ -63,7 +59,6 @@ UKF::UKF() {
   // Radar measurement noise standard deviation radius change in m/s
   std_radrd_ = 0.3;
 
-  n_x_ = 5;
   n_aug_ = 7;
   lambda_ = 3 - n_x_;
 
